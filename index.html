@@ -1,1 +1,371 @@
-meta utc=8
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blockchain Developer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0a;
+      color: #e2e8f0;
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── NAV ── */
+    nav {
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1f1f1f;
+    }
+    nav .logo {
+      color: #818cf8;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+    nav .nav-links a {
+      color: #6b7280;
+      text-decoration: none;
+      font-size: 13px;
+      margin-left: 1.5rem;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:hover { color: #818cf8; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      max-width: 640px;
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: #7c3aed;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .bio {
+      color: #94a3b8;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    /* ── WALLET CONNECT ── */
+    .wallet-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2.5rem;
+    }
+    #connectBtn {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    #connectBtn:hover { background: #6d28d9; transform: scale(1.02); }
+    #walletAddr {
+      color: #4ade80;
+      font-size: 12px;
+      display: none;
+    }
+    #walletError {
+      color: #f87171;
+      font-size: 12px;
+      display: none;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 640px;
+      padding: 0 2rem;
+      margin-bottom: 4rem;
+    }
+    .stat {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stat-value {
+      color: #818cf8;
+      font-size: 1.75rem;
+      font-weight: 600;
+    }
+    .stat-label {
+      color: #6b7280;
+      font-size: 11px;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    /* ── SKILLS ── */
+    section {
+      width: 100%;
+      max-width: 640px;
+      padding: 0 2rem;
+      margin-bottom: 3rem;
+    }
+    .section-title {
+      color: #6b7280;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #1f1f1f;
+      padding-bottom: 8px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background: #1e1b4b;
+      color: #818cf8;
+      border: 1px solid #3730a3;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .project-card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 10px;
+      padding: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: #4338ca; }
+    .project-name {
+      color: #e2e8f0;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .project-desc {
+      color: #6b7280;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .project-chain {
+      color: #4ade80;
+      font-size: 11px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid #1f1f1f;
+      color: #374151;
+      font-size: 12px;
+      margin-top: auto;
+    }
+    footer a {
+      color: #4b5563;
+      text-decoration: none;
+      margin: 0 12px;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: #818cf8; }
+
+    @media (max-width: 480px) {
+      .stats { grid-template-columns: 1fr 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">⬡ YourName.eth</span>
+    <div class="nav-links">
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="mailto:you@email.com">Contact</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="avatar">⬡</div>
+    <h1>Your Name</h1>
+    <p class="subtitle">Blockchain Developer</p>
+    <p class="bio">
+      Building decentralized applications and smart contracts on Ethereum and EVM-compatible chains.
+      Passionate about DeFi, NFTs, and open-source Web3 infrastructure.
+    </p>
+
+    <div class="wallet-section">
+      <button id="connectBtn" onclick="connectWallet()">Connect Wallet</button>
+      <span id="walletAddr"></span>
+      <span id="walletError">MetaMask not found — <a href="https://metamask.io" style="color:#f87171" target="_blank">install it</a></span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value">42</div>
+      <div class="stat-label">Contracts Deployed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">3yr</div>
+      <div class="stat-label">Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">5</div>
+      <div class="stat-label">Chains</div>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <section id="skills">
+    <p class="section-title">Skills</p>
+    <div class="tags">
+      <span class="tag">Solidity</span>
+      <span class="tag">Ethereum</span>
+      <span class="tag">Web3.js</span>
+      <span class="tag">Ethers.js</span>
+      <span class="tag">Hardhat</span>
+      <span class="tag">Foundry</span>
+      <span class="tag">DeFi</span>
+      <span class="tag">NFT</span>
+      <span class="tag">IPFS</span>
+      <span class="tag">Polygon</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">React</span>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <p class="section-title">Projects</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <p class="project-name">DeFi Yield Vault</p>
+        <p class="project-desc">Auto-compounding yield aggregator with multi-strategy support and timelock governance.</p>
+        <p class="project-chain">⬡ Ethereum</p>
+      </div>
+      <div class="project-card">
+        <p class="project-name">NFT Marketplace</p>
+        <p class="project-desc">Gas-optimized marketplace with lazy minting and royalty enforcement on-chain.</p>
+        <p class="project-chain">⬡ Polygon</p>
+      </div>
+      <div class="project-card">
+        <p class="project-name">DAO Framework</p>
+        <p class="project-desc">Modular governance system with on-chain voting and treasury management.</p>
+        <p class="project-chain">⬡ Arbitrum</p>
+      </div>
+      <div class="project-card">
+        <p class="project-name">Cross-chain Bridge</p>
+        <p class="project-desc">Trustless token bridge between EVM chains using lock-and-mint mechanism.</p>
+        <p class="project-chain">⬡ Multi-chain</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div style="margin-bottom: 12px;">
+      <a href="https://github.com/yourname" target="_blank">GitHub</a>
+      <a href="https://twitter.com/yourname" target="_blank">Twitter</a>
+      <a href="mailto:you@email.com">Email</a>
+    </div>
+    <span>yourname.eth · Built on-chain, hosted on GitHub Pages</span>
+  </footer>
+
+  <script>
+    async function connectWallet() {
+      const btn = document.getElementById('connectBtn');
+      const addr = document.getElementById('walletAddr');
+      const err = document.getElementById('walletError');
+
+      if (typeof window.ethereum === 'undefined') {
+        err.style.display = 'block';
+        btn.style.display = 'none';
+        return;
+      }
+
+      btn.textContent = 'Connecting...';
+      btn.disabled = true;
+
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
+        const short = account.slice(0, 6) + '...' + account.slice(-4);
+
+        btn.textContent = 'Connected';
+        btn.style.background = '#065f46';
+        btn.disabled = false;
+
+        addr.style.display = 'block';
+        addr.textContent = short;
+
+        // Listen for account changes
+        window.ethereum.on('accountsChanged', (accs) => {
+          if (accs.length === 0) {
+            btn.textContent = 'Connect Wallet';
+            btn.style.background = '#7c3aed';
+            addr.style.display = 'none';
+          } else {
+            addr.textContent = accs[0].slice(0, 6) + '...' + accs[0].slice(-4);
+          }
+        });
+
+      } catch (e) {
+        btn.textContent = 'Rejected';
+        btn.style.background = '#7f1d1d';
+        btn.disabled = false;
+      }
+    }
+  </script>
+
+</body>
+</html>
